@@ -10,24 +10,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer, { rootSaga } from './modules';
 
-const SagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(SagaMiddleware)),
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
 );
 
-SagaMiddleware.run(rootSaga);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 serviceWorker.unregister();
